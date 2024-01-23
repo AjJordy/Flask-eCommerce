@@ -7,13 +7,18 @@
 
 ```python
 # $ flask shell
-db.create_all()
-db.session.commit()
-exit()
-
-# $ flask shell
 db.drop_all()
 db.create_all()
 db.session.commit()
 exit()
+```
+
+## AWS Elastic Beanstalk
+
+```bash
+eb init -p python-3.11 api-dev --region us-east-1
+eb create api-dev
+eb deploy api-dev
+eb open api-dev
+eb terminate api-dev
 ```

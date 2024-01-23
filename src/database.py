@@ -1,6 +1,6 @@
 from flask_sqlalchemy import SQLAlchemy
-from app import app
+from application import application
 
-app.config['SECRET_KEY'] = "minha_chave_123"
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///ecomerce.db'
-db = SQLAlchemy(app)
+application.config['SECRET_KEY'] = "minha_chave_123"
+application.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///ecomerce.db'
+db = SQLAlchemy(application)

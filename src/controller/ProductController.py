@@ -1,11 +1,11 @@
 from flask_login import login_required
 from flask import jsonify, request
-from app import app
+from application import application
 from database import db
 from model.Product import Product
 
 
-@app.route('/api/products/<int:product_id>', methods=['GET'])
+@application.route('/api/products/<int:product_id>', methods=['GET'])
 def get_product_details(product_id: int):
 	product = Product.query.get(product_id)
 	if product:		
@@ -18,7 +18,7 @@ def get_product_details(product_id: int):
 	return jsonify({"message": "Product not found"}), 404
 
 
-@app.route('/api/products/update/<int:product_id>', methods=['PUT'])
+@application.route('/api/products/update/<int:product_id>', methods=['PUT'])
 @login_required
 def update_product_details(product_id: int):
 	product = Product.query.get(product_id)
@@ -39,7 +39,7 @@ def update_product_details(product_id: int):
 	return jsonify({"message": "Product updated successfully"})
 
 
-@app.route('/api/products/delete/<int:product_id>', methods=['DELETE'])
+@application.route('/api/products/delete/<int:product_id>', methods=['DELETE'])
 @login_required
 def delete_product(product_id: int):
 	product = Product.query.get(product_id)
@@ -50,7 +50,7 @@ def delete_product(product_id: int):
 	return jsonify({"message": "Product not found"}), 404
 
 
-@app.route('/api/products', methods=['GET'])
+@application.route('/api/products', methods=['GET'])
 def get_product_details(product_id: int):
 	products = Product.query.all()
 	product_list = []

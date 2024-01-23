@@ -1,13 +1,13 @@
 from flask_login import login_required
 from flask import jsonify, request
-from app import app
+from application import application
 from database import db
 from model.CartItem import CartItem
 from model.User import User
 from model.Product import Product
 
 
-@app.route('/api/cart/add/<int:product_id>', methods=['POST'])
+@application.route('/api/cart/add/<int:product_id>', methods=['POST'])
 @login_required
 def add_to_cart(product_id):
 	user = User.query.get(int(current_user.id))
@@ -20,7 +20,7 @@ def add_to_cart(product_id):
 	return jsonify({'message': 'Failed to add item to the cart'}), 400
 
 
-@app.route('/api/cart/remove/<int:product_id>', method=['DELETE'])
+@application.route('/api/cart/remove/<int:product_id>', method=['DELETE'])
 @login_required
 def remove_from_cart(product_id):
 	cart_item = CartItem.query.filter_by(user_id=current_user.id, product_id=product_id).first()
@@ -31,7 +31,7 @@ def remove_from_cart(product_id):
 	return jsonify({'message': 'Failed to remove item to the cart'}), 400
 
 
-@app.route('/api/cart', methods=['GET'])
+@application.route('/api/cart', methods=['GET'])
 @login_required
 def view_cart():
 	user = User.query.get(int(current_user.id))
@@ -49,7 +49,7 @@ def view_cart():
 	return jsonify(cart_content)
 	
 
-@app.route('/api/cart/checkout', methods=['POST'])
+@application.route('/api/cart/checkout', methods=['POST'])
 @login_required
 def checkout():
 	user = User.query.get(int(current_user.id))

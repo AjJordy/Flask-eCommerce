@@ -1,7 +1,7 @@
 from flask import request
 from flask_login import login_user, login_required, logout_user
 
-from app import app, login_manager
+from application import application, login_manager
 from model.User import User
 
 
@@ -10,7 +10,7 @@ def load_user(user_id):
 	return User.query.get(int(user_id))
 
 
-@app.route('/login', methods=["POST"])
+@application.route('/login', methods=["POST"])
 def login():
 	data = request.json
 	user = User.query.filter_by(username=data.get("username")).first()
@@ -21,14 +21,14 @@ def login():
 	return jsonify({"message":"Unauthorized. Invalid credentials"}), 401
 
 
-@app.route('/logout', methods=["POST"])
+@application.route('/logout', methods=["POST"])
 @login_required
 def logout():
 	logout_user()
 	return jsonify({"message":"Logout successfully"})
 
 
-@app.route('/api/products/add', methods=["POST"])
+@application.route('/api/products/add', methods=["POST"])
 @login_required
 def add_product():
 	data = request.json
