@@ -1,3 +1,4 @@
+from flask_sqlalchemy import SQLAlchemy
 from app import app
 
 app.config['SECRET_KEY'] = "minha_chave_123"
